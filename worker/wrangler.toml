@@ -1,0 +1,12 @@
+name = "robux-friends-queue-api"
+main = "src/index.js"
+compatibility_date = "2026-11-02"
+
+[[d1_databases]]
+binding = "robux_friends_queue"
+database_name = "robux-friends-queue"
+database_id = "bd434a97-93c0-4bc0-ab71-96b58da50ade"
+
+[vars]
+# Comma-separated exact origins. Set these to the GitHub Pages origin(s) and local dev origin.
+ALLOWED_ORIGINS = "https://duckdose.github.io/roblox-claude-code-test/"

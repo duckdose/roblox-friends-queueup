@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f3ef" />
+    <title>Robux Friends Queue</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <a class="brand" href="#" aria-label="Robux Friends Queue home"
+          ><span class="brand-mark">R</span><span>FRIENDS <b>QUEUE</b></span></a
+        >
+        <button class="text-button" id="admin-toggle" type="button">
+          Admin
+        </button>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">A little something for the crew</p>
+        <h1>Free Robux, <span>by Sun.</span></h1>
+        <p class="lede">
+          Add your Roblox username to the queue and check the board for updates.
+          Requests are reviewed manually and expire after one month.
+        </p>
+      </section>
+
+      <section class="access-card" id="access-card">
+        <div>
+          <h2>Friends access</h2>
+          <p>Enter the invite code you received to view and join the queue.</p>
+        </div>
+        <form id="access-form" class="inline-form">
+          <label class="sr-only" for="invite-code">Invite code</label>
+          <input
+            id="invite-code"
+            type="password"
+            autocomplete="off"
+            placeholder="Invite code"
+            required
+          />
+          <button class="button button-dark" type="submit">
+            Enter queue <span aria-hidden="true">→</span>
+          </button>
+        </form>
+        <p class="form-message" id="access-message" role="status"></p>
+      </section>
+
+      <div id="queue-content" hidden>
+        <section class="request-card">
+          <div>
+            <p class="eyebrow">Your request</p>
+            <h2>Get in the queue</h2>
+            <p>
+              Use your Roblox username. It will be visible to everyone with
+              access to this board.
+            </p>
+          </div>
+          <form id="request-form" class="request-form">
+            <label for="roblox-username">Roblox username</label>
+            <div class="inline-form">
+              <input
+                id="roblox-username"
+                name="username"
+                maxlength="20"
+                autocomplete="off"
+                placeholder="Your username"
+                required
+              /><button class="button button-coral" type="submit">
+                Join queue <span aria-hidden="true">→</span>
+              </button>
+            </div>
+            <p class="form-message" id="request-message" role="status"></p>
+          </form>
+        </section>
+
+        <section class="board-section">
+          <div class="board-heading">
+            <div>
+              <p class="eyebrow">Live status</p>
+              <h2>The board</h2>
+            </div>
+            <button class="text-button" id="refresh-button" type="button">
+              Refresh ↻
+            </button>
+          </div>
+          <div class="board-card">
+            <div class="board-head">
+              <span>Roblox username</span><span>Requested</span
+              ><span>Status</span>
+            </div>
+            <div id="board-rows" class="board-rows">
+              <p class="empty-state">Loading requests…</p>
+            </div>
+            <p class="board-footnote">
+              Requests are listed by date. Only the site admin can update or
+              remove a request.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <section class="admin-card" id="admin-card" hidden>
+        <div class="board-heading">
+          <div>
+            <p class="eyebrow">Queue controls</p>
+            <h2>Admin</h2>
+          </div>
+          <button class="text-button" id="admin-close" type="button">
+            Close
+          </button>
+        </div>
+        <form id="admin-login" class="inline-form">
+          <label class="sr-only" for="admin-password">Admin password</label
+          ><input
+            id="admin-password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Admin password"
+            required
+          /><button class="button button-dark" type="submit">Sign in</button>
+        </form>
+        <p class="form-message" id="admin-message" role="status"></p>
+        <div id="admin-controls" hidden>
+          <div class="admin-toolbar">
+            <p>Signed in. Update status or remove a request.</p>
+            <button class="text-button" id="admin-logout" type="button">
+              Sign out
+            </button>
+          </div>
+          <div id="admin-rows" class="admin-rows"></div>
+        </div>
+      </section>
+
+      <footer>
+        <span>Made for friends, managed by one human.</span
+        ><span>No IP addresses are collected.</span>
+      </footer>
+    </main>
+    <script src="app.js" defer></script>
+  </body>
+</html>

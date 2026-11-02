@@ -1,0 +1,13 @@
+{
+  "name": "robux-friends-queue",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "wrangler dev --config worker/wrangler.toml --local --port 8788",
+    "check": "node --check app.js && node --check worker/src/index.js",
+    "deploy:api": "wrangler deploy --config worker/wrangler.toml"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
