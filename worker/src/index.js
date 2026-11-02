@@ -1,6 +1,14 @@
 const STATUSES = new Set(['pending', 'accepted', 'rejected', 'fulfilled']);
 const SESSION_TTL = 8 * 60 * 60;
-const MONTH_MS = 30 * 24 * 60 * 60 * 1000;
+function oneMonthAgo() {
+  const date = new Date();
+  const day = date.getUTCDate();
+  date.setUTCDate(1);
+  date.setUTCMonth(date.getUTCMonth() - 1);
+  const lastDay = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0)).getUTCDate();
+  date.setUTCDate(Math.min(day, lastDay));
+  return date.toISOString();
+}
 
 function response(data, status, origin) {
   return new Response(JSON.stringify(data), {
@@ -40,8 +48,7 @@ async function requireAdmin(request, env) {
 }
 
 async function cleanupExpired(env) {
-  const cutoff = new Date(Date.now() - MONTH_MS).toISOString();
-  await env.DB.prepare('DELETE FROM requests WHERE created_at <= ?').bind(cutoff).run();
+  await env.DB.prepare('DELETE FROM requests WHERE created_at <= ?').bind(oneMonthAgo()).run();
 }
 
 async function route(request, env, origin) {
@@ -71,8 +78,11 @@ async function route(request, env, origin) {
     const createdAt = new Date().toISOString();
     try {
       await env.DB.prepare('INSERT INTO requests (username, status, created_at) VALUES (?, ?, ?)').bind(username, 'pending', createdAt).run();
-    } catch {
-      return jsonError('A request with that username already exists.', 409, origin);
+    } catch (error) {
+      if (error instanceof Error && /UNIQUE constraint failed/i.test(error.message)) {
+        return jsonError('A request with that username already exists.', 409, origin);
+      }
+      throw error;
     }
     return response({ ok: true }, 201, origin);
   }

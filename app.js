@@ -188,9 +188,14 @@ async function loadAdminRows() {
     adminToken = "";
     sessionStorage.removeItem("friendsQueueAdmin");
     document.querySelector("#admin-controls").hidden = true;
+    document.querySelector("#admin-login").hidden = false;
+    message(document.querySelector("#admin-message"), "Your session expired. Sign in again.", "error");
     return;
   }
-  if (!response.ok) return;
+  if (!response.ok) {
+    message(document.querySelector("#admin-message"), "Could not load admin requests.", "error");
+    return;
+  }
   const requests = await response.json();
   document.querySelector("#admin-login").hidden = true;
   document.querySelector("#admin-controls").hidden = false;
