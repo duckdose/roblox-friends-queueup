@@ -16,6 +16,8 @@ There is no configured lint command or test suite. Local secrets belong in the i
 
 ## Architecture
 
-The project separates a static browser app from its API. `index.html`, `styles.css`, and `app.js` are published from the repository root via GitHub Pages; the frontend calls a separately deployed Cloudflare Worker. `worker/src/index.js` handles API routing, exact-origin CORS validation, invite-code checks for `/api/*`, request validation and D1 operations, expiry cleanup, and admin authentication. Admin login issues an eight-hour token; only its hash is stored in D1, and admin request mutations require that session. `worker/schema.sql` defines request and session tables, while `worker/wrangler.toml` binds D1 and configures allowed origins.
+The project separates a static browser app from its API. `index.html`, `styles.css`, and `app.js` are published from the repository root via GitHub Pages; the frontend calls a separately deployed Cloudflare Worker. English and Thai UI strings and locale switching are implemented in `app.js`; the selected language persists in local storage. The browser stores the invite code and admin token only for the current session.
+
+`worker/src/index.js` handles API routing, exact-origin CORS validation, invite-code checks for `/api/*`, request validation and D1 operations, expiry cleanup, and admin authentication. Admin login issues an eight-hour token; only its hash is stored in D1, and admin request mutations require that session. `worker/schema.sql` defines request and session tables, while `worker/wrangler.toml` binds D1 and configures allowed origins.
 
 The board's read and submit endpoints require the shared invite code; admin routes additionally require an admin session where appropriate. Requests are cleaned up after one calendar month. Deployment setup, environment configuration, and GitHub Pages publishing are documented in `README.md`.

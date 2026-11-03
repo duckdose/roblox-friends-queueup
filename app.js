@@ -12,6 +12,8 @@ const translations = {
     enterQueue: 'Enter queue <span aria-hidden="true">→</span>',
     yourRequest: "Your request",
     joinHeading: "Get in the queue",
+    usernameVisibility:
+      "Use your Roblox username. It will be visible to everyone with access to this board.",
     robloxUsername: "Roblox username",
     yourUsername: "Your username",
     joinQueue: 'Join queue <span aria-hidden="true">→</span>',
@@ -41,7 +43,7 @@ const translations = {
     loadBoardError: "Could not load the board. Try refreshing.",
     serviceUnavailable:
       "The queue service is not configured yet. Please try again later.",
-    invalidInvite: t("invalidInvite"),
+    invalidInvite: "Invalid invite code. Please check it and try again.",
     entered: "You’re in. The board is ready.",
     queueUnavailable: "Queue service is unavailable. Please try again later.",
     addError: "Could not add your request.",
@@ -52,8 +54,8 @@ const translations = {
     sessionExpired: "Your session expired. Sign in again.",
     adminLoadError: "Could not load admin requests.",
     delete: "Delete",
-    updateError: t("updateError"),
-    deleteError: t("deleteError"),
+    updateError: "Could not update the request.",
+    deleteError: "Could not delete the request.",
     deleteConfirm: (name) => `Delete ${name}’s request? This cannot be undone.`,
     signedOut: "Signed out.",
     statusFor: (name) => `Status for ${name}`,
@@ -70,6 +72,8 @@ const translations = {
     enterQueue: 'เข้าคิว <span aria-hidden="true">→</span>',
     yourRequest: "คำขอของคุณ",
     joinHeading: "เข้าร่วมคิว",
+    usernameVisibility:
+      "ใช้ชื่อผู้ใช้ Roblox ของคุณ ชื่อนี้จะปรากฏให้ทุกคนที่เข้าถึงกระดานนี้เห็น",
     robloxUsername: "ชื่อผู้ใช้ Roblox",
     yourUsername: "ชื่อผู้ใช้ของคุณ",
     joinQueue: 'เข้าร่วมคิว <span aria-hidden="true">→</span>',
@@ -116,8 +120,7 @@ const translations = {
     statusFor: (name) => `สถานะของ ${name}`,
   },
 };
-let language =
-  localStorage.getItem("friendsQueueLanguage") === "th" ? "th" : "en";
+let language = "en";
 const t = (key, ...args) => {
   const value = translations[language][key] || translations.en[key];
   return typeof value === "function" ? value(...args) : value;
@@ -135,7 +138,7 @@ function applyLanguage() {
     element.setAttribute("aria-label", t(element.dataset.i18nAriaLabel));
   });
   const toggle = document.querySelector("#language-toggle");
-  toggle.textContent = language === "en" ? "ไทย" : "English";
+  toggle.textContent = language === "en" ? "ไทย" : "อังกฤษ";
   toggle.setAttribute(
     "aria-label",
     language === "en" ? "เปลี่ยนเป็นภาษาไทย" : "Switch to English",
@@ -420,7 +423,6 @@ document.querySelector("#admin-logout").addEventListener("click", () => {
 
 document.querySelector("#language-toggle").addEventListener("click", () => {
   language = language === "en" ? "th" : "en";
-  localStorage.setItem("friendsQueueLanguage", language);
   applyLanguage();
 });
 
