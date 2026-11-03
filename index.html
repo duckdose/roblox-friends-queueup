@@ -10,18 +10,39 @@
   <body>
     <main class="shell">
       <header class="hero">
-        <a class="brand" href="#" aria-label="Robux Friends Queue home"
-          ><span class="brand-mark">R</span><span>FRIENDS <b>QUEUE</b></span></a
+        <a
+          class="brand"
+          href="#"
+          aria-label="Robux Friends Queue home"
+          data-i18n-aria-label="home"
+          ><span class="brand-mark">R</span><span>SUNNY <b>ROBUX</b></span></a
         >
-        <button class="text-button" id="admin-toggle" type="button">
-          Admin
-        </button>
+        <div class="header-actions">
+          <button
+            class="text-button"
+            id="language-toggle"
+            type="button"
+            aria-label="Switch to Thai"
+          >
+            ไทย
+          </button>
+          <button
+            class="text-button"
+            id="admin-toggle"
+            type="button"
+            data-i18n="admin"
+          >
+            Admin
+          </button>
+        </div>
       </header>
 
       <section class="intro">
-        <p class="eyebrow">A little something for the crew</p>
-        <h1>Free Robux, <span>by Sun.</span></h1>
-        <p class="lede">
+        <p class="eyebrow" data-i18n="tagline">
+          A little something for the crew
+        </p>
+        <h1 data-i18n="headline">Free Robux, <span>by Sun.</span></h1>
+        <p class="lede" data-i18n="intro">
           Add your Roblox username to the queue and check the board for updates.
           Requests are reviewed manually and expire after one month.
         </p>
@@ -29,19 +50,28 @@
 
       <section class="access-card" id="access-card">
         <div>
-          <h2>Friends access</h2>
-          <p>Enter the invite code you received to view and join the queue.</p>
+          <h2 data-i18n="friendsAccess">Friends access</h2>
+          <p data-i18n="accessHelp">
+            Enter the invite code you received to view and join the queue.
+          </p>
         </div>
         <form id="access-form" class="inline-form">
-          <label class="sr-only" for="invite-code">Invite code</label>
+          <label class="sr-only" for="invite-code" data-i18n="inviteCode"
+            >Invite code</label
+          >
           <input
             id="invite-code"
             type="password"
             autocomplete="off"
             placeholder="Invite code"
+            data-i18n-placeholder="inviteCode"
             required
           />
-          <button class="button button-dark" type="submit">
+          <button
+            class="button button-dark"
+            type="submit"
+            data-i18n="enterQueue"
+          >
             Enter queue <span aria-hidden="true">→</span>
           </button>
         </form>
@@ -51,15 +81,17 @@
       <div id="queue-content" hidden>
         <section class="request-card">
           <div>
-            <p class="eyebrow">Your request</p>
-            <h2>Get in the queue</h2>
-            <p>
+            <p class="eyebrow" data-i18n="yourRequest">Your request</p>
+            <h2 data-i18n="joinHeading">Get in the queue</h2>
+            <p data-i18n="usernameVisibility">
               Use your Roblox username. It will be visible to everyone with
               access to this board.
             </p>
           </div>
           <form id="request-form" class="request-form">
-            <label for="roblox-username">Roblox username</label>
+            <label for="roblox-username" data-i18n="robloxUsername"
+              >Roblox username</label
+            >
             <div class="inline-form">
               <input
                 id="roblox-username"
@@ -67,8 +99,13 @@
                 maxlength="20"
                 autocomplete="off"
                 placeholder="Your username"
+                data-i18n-placeholder="yourUsername"
                 required
-              /><button class="button button-coral" type="submit">
+              /><button
+                class="button button-coral"
+                type="submit"
+                data-i18n="joinQueue"
+              >
                 Join queue <span aria-hidden="true">→</span>
               </button>
             </div>
@@ -79,22 +116,28 @@
         <section class="board-section">
           <div class="board-heading">
             <div>
-              <p class="eyebrow">Live status</p>
-              <h2>The board</h2>
+              <p class="eyebrow" data-i18n="liveStatus">Live status</p>
+              <h2 data-i18n="board">The board</h2>
             </div>
-            <button class="text-button" id="refresh-button" type="button">
+            <button
+              class="text-button"
+              id="refresh-button"
+              type="button"
+              data-i18n="refresh"
+            >
               Refresh ↻
             </button>
           </div>
           <div class="board-card">
             <div class="board-head">
-              <span>Roblox username</span><span>Requested</span
-              ><span>Status</span>
+              <span data-i18n="robloxUsername">Roblox username</span
+              ><span data-i18n="requested">Requested</span
+              ><span data-i18n="status">Status</span>
             </div>
             <div id="board-rows" class="board-rows">
-              <p class="empty-state">Loading requests…</p>
+              <p class="empty-state" data-i18n="loading">Loading requests…</p>
             </div>
-            <p class="board-footnote">
+            <p class="board-footnote" data-i18n="boardFootnote">
               Requests are listed by date. Only the site admin can update or
               remove a request.
             </p>
@@ -105,28 +148,44 @@
       <section class="admin-card" id="admin-card" hidden>
         <div class="board-heading">
           <div>
-            <p class="eyebrow">Queue controls</p>
-            <h2>Admin</h2>
+            <p class="eyebrow" data-i18n="queueControls">Queue controls</p>
+            <h2 data-i18n="admin">Admin</h2>
           </div>
-          <button class="text-button" id="admin-close" type="button">
+          <button
+            class="text-button"
+            id="admin-close"
+            type="button"
+            data-i18n="close"
+          >
             Close
           </button>
         </div>
         <form id="admin-login" class="inline-form">
-          <label class="sr-only" for="admin-password">Admin password</label
+          <label class="sr-only" for="admin-password" data-i18n="adminPassword"
+            >Admin password</label
           ><input
             id="admin-password"
             type="password"
             autocomplete="current-password"
             placeholder="Admin password"
+            data-i18n-placeholder="adminPassword"
             required
-          /><button class="button button-dark" type="submit">Sign in</button>
+          /><button class="button button-dark" type="submit" data-i18n="signIn">
+            Sign in
+          </button>
         </form>
         <p class="form-message" id="admin-message" role="status"></p>
         <div id="admin-controls" hidden>
           <div class="admin-toolbar">
-            <p>Signed in. Update status or remove a request.</p>
-            <button class="text-button" id="admin-logout" type="button">
+            <p data-i18n="adminHelp">
+              Signed in. Update status or remove a request.
+            </p>
+            <button
+              class="text-button"
+              id="admin-logout"
+              type="button"
+              data-i18n="signOut"
+            >
               Sign out
             </button>
           </div>
@@ -135,8 +194,9 @@
       </section>
 
       <footer>
-        <span>Made for friends, managed by one human.</span
-        ><span>No IP addresses are collected.</span>
+        <span data-i18n="footerOne"
+          >Made for friends, managed by one human.</span
+        ><span data-i18n="footerTwo">No IP addresses are collected.</span>
       </footer>
     </main>
     <script src="app.js" defer></script>
