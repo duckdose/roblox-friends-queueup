@@ -60,6 +60,11 @@ body {
   font-weight: 800;
   letter-spacing: 0;
 }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 .text-button {
   padding: 8px 0;
   border: 0;
